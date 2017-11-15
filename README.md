@@ -1,0 +1,2 @@
+# utl_R_sas_v5_xport_with_long_variable_names
+R script that creats V5 SAS transport file that accommodates long variable names   I use the SAS label in the V5 SAS transport file to rename the 8 char variable names   Just two significant limitation left to fix with the V5 transport format       1. Slight loss with very large numbers due to IBM 8 bit exponent (IEE 754 float uses 11 bits)      2. Character length limited to 200 bytes
