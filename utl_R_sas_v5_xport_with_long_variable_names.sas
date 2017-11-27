@@ -90,11 +90,6 @@ write.xport(iris,file="d:/xpt/rxpt.xpt");
   if _n_=0 then do;
     rc=%sysfunc(dosubl('
 
-        * just in case;
-        proc datasets lib=work mt=(data view);
-          delete __: iris;
-        run;quit;
-
         data __ren001;
            set &dsn(obs=1);
         run;quit;
@@ -105,9 +100,19 @@ write.xport(iris,file="d:/xpt/rxpt.xpt");
 
         proc sql;
           select
-             catx(' ',_name_,"as",_label_) into :rens separated by ","
-          from __ren002
-        ;quit;
+            catx(' ',_name_,"as",lbl) into :rens separated by ","
+          from
+            (
+             select
+                _name_
+               ,case
+                    when (_label_ = ' ') then _name_
+                    else _label_
+                end as lbl
+             from
+                __ren002
+            )
+       ;quit;
 
         proc sql;
            create
@@ -122,6 +127,8 @@ write.xport(iris,file="d:/xpt/rxpt.xpt");
   end;
 
 %mend utl_rens;
+
+
 
 libname xpt xport "d:/xpt/rxpt.xpt";
 data iris_log_names;
