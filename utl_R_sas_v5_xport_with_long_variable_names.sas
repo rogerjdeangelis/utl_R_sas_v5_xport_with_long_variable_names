@@ -125,9 +125,9 @@ write.xport(iris,file="d:/xpt/rxpt.xpt");
                                                                                                                                                                                                                                                                 
 %mend utl_rens;                                                                                                                                                                                                                                                 
                           
-
-
-
+proc datasets lib=work mt=view mt=data;   
+ delete demo ;                            
+run;quit;                                 
 
 libname xpt xport "d:/xpt/rxpt.xpt";
 data iris_log_names;
