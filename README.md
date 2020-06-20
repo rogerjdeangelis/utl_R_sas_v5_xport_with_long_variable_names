@@ -126,8 +126,9 @@ R script that creats V5 SAS transport file that accommodates long variable names
                                                                                             
     %mend utl_rens;                                                                         
                                                                                             
-
-
+    proc datasets lib=work mt=view mt=data;   
+        delete demo ;                            
+    run;quit;                                 
 
     libname xpt xport "d:/xpt/rxpt.xpt";
     data iris_log_names;
